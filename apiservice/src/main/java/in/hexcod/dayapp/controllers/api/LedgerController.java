@@ -8,6 +8,7 @@ import in.hexcod.dayapp.services.LedgerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class LedgerController {
     LedgerService ledgerService;
 
     @RequestMapping(value = "/entry", method = RequestMethod.POST)
-    public ApiResponse<LedgerEntry> entry(@RequestBody EntryRequest entryRequest) {
+    public ApiResponse<LedgerEntry> entry(@Valid @RequestBody EntryRequest entryRequest) {
         LedgerEntry ledgerEntry = ledgerService.entry(entryRequest);
         if(ledgerEntry == null) {
             return ApiResponse.failure().build();

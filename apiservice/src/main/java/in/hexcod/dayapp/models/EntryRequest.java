@@ -1,10 +1,15 @@
 package in.hexcod.dayapp.models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by sidhant on 17-05-2016.
  */
 public class EntryRequest {
+    @Size(min = 1, max = 30)
     private String name;
+    @NotNull
     private String date;
     private int give;
     private int take;
