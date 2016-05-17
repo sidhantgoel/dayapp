@@ -79,8 +79,8 @@ public class LedgerService {
     public List<SummaryEntry> summaryByName() {
         Aggregation agg = newAggregation(
                 group("accountId").sum("give").as("give").sum("take").as("take"),
-                project("give", "take").and("accountId").as("nameOrDate"),
-                sort(Sort.Direction.DESC, "accountId")
+                project("give", "take").and("_id").as("nameOrDate"),
+                sort(Sort.Direction.DESC, "_id")
         );
 
         //Convert the aggregation result into a List
