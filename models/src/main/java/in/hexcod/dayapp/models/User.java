@@ -1,6 +1,7 @@
 package in.hexcod.dayapp.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -10,8 +11,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     @Id
     private String id;
+    @Indexed(unique = true)
     private String username;
     private String passwordHash;
+    private String loginSecret;
 
     public String getId() {
         return id;
@@ -35,5 +38,13 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public String getLoginSecret() {
+        return loginSecret;
+    }
+
+    public void setLoginSecret(String loginSecret) {
+        this.loginSecret = loginSecret;
     }
 }

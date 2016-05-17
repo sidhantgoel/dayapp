@@ -1,16 +1,17 @@
 package in.hexcod.dayapp.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by sidhant on 17-05-2016.
  */
 @Document
-public class LedgerEntry {
+public class Day {
     @Id
     private String id;
-    private String accountId;
+    @Indexed(unique = true)
     private String date;
     private int give;
     private int take;
@@ -31,12 +32,12 @@ public class LedgerEntry {
         this.date = date;
     }
 
-    public String getAccountId() {
-        return accountId;
+    public int getGive() {
+        return give;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setGive(int give) {
+        this.give = give;
     }
 
     public int getTake() {
@@ -45,13 +46,5 @@ public class LedgerEntry {
 
     public void setTake(int take) {
         this.take = take;
-    }
-
-    public int getGive() {
-        return give;
-    }
-
-    public void setGive(int give) {
-        this.give = give;
     }
 }
