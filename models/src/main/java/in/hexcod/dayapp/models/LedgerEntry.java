@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class LedgerEntry {
     @Id
     private String id;
-    private String accountId;
+    private String name;
     private String date;
     private int give;
     private int take;
@@ -31,12 +31,12 @@ public class LedgerEntry {
         this.date = date;
     }
 
-    public String getAccountId() {
-        return accountId;
+    public String getName() {
+        return name;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getTake() {

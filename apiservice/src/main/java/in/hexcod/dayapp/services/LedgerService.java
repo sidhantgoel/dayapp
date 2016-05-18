@@ -42,7 +42,7 @@ public class LedgerService {
             return null;
         }
         LedgerEntry ledgerEntry = new LedgerEntry();
-        ledgerEntry.setAccountId(account.getId());
+        ledgerEntry.setName(entryRequest.getName());
         ledgerEntry.setDate(entryRequest.getDate());
         ledgerEntry.setGive(entryRequest.getGive());
         ledgerEntry.setTake(entryRequest.getTake());
@@ -78,7 +78,7 @@ public class LedgerService {
 
     public List<SummaryEntry> summaryByName() {
         Aggregation agg = newAggregation(
-                group("accountId").sum("give").as("give").sum("take").as("take"),
+                group("name").sum("give").as("give").sum("take").as("take"),
                 project("give", "take").and("_id").as("nameOrDate"),
                 sort(Sort.Direction.DESC, "_id")
         );
@@ -87,11 +87,6 @@ public class LedgerService {
         AggregationResults<SummaryEntry> groupResults
                 = mongoTemplate.aggregate(agg, LedgerEntry.class, SummaryEntry.class);
         List<SummaryEntry> result = groupResults.getMappedResults();
-
-        for(SummaryEntry summaryEntry : result) {
-            Account account = accountService.get(summaryEntry.getNameOrDate());
-            summaryEntry.setNameOrDate(account.getName());
-        }
 
         return result;
     }
