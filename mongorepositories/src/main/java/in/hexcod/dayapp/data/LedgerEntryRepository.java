@@ -9,6 +9,6 @@ import java.util.List;
  * Created by sidhant on 17-05-2016.
  */
 public interface LedgerEntryRepository extends MongoRepository<LedgerEntry, String> {
-    List<LedgerEntry> findByAccountId(String accountId);
+    List<LedgerEntry> findByName(String name);
     List<LedgerEntry> findByDate(String date);
 }

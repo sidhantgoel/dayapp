@@ -54,11 +54,7 @@ public class LedgerService {
     }
 
     public List<LedgerEntry> getByName(String name) {
-        Account account = accountService.get(name);
-        if(account == null) {
-            return null;
-        }
-        return ledgerEntryRepository.findByAccountId(account.getId());
+        return ledgerEntryRepository.findByName(name);
     }
 
     public List<SummaryEntry> summaryByDate() {
