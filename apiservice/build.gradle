@@ -49,6 +49,10 @@ dependencies {
     compile 'org.testng:testng:6.9.6'
 }
 
+springBoot {
+    executable = true
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.11'
 }
