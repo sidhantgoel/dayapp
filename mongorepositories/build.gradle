@@ -3,14 +3,14 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-
+apply plugin: 'org.springframework.boot'
 
 jar {
     baseName = 'mongorepositories'
@@ -27,7 +27,7 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile project(":models")
-    testCompile("junit:junit")
+    testCompile("junit:junit:4.12")
 }
 
 task wrapper(type: Wrapper) {

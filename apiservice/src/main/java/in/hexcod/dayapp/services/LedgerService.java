@@ -36,6 +36,10 @@ public class LedgerService {
     @Autowired
     MongoTemplate mongoTemplate;
 
+    public void delete(String id) {
+        ledgerEntryRepository.delete(id);
+    }
+
     public LedgerEntry entry(EntryRequest entryRequest) {
         Account account = accountService.getOrCreate(entryRequest.getName());
         if(account == null) {
@@ -61,7 +65,7 @@ public class LedgerService {
         Aggregation agg = newAggregation(
                 group("date").sum("give").as("give").sum("take").as("take"),
                 project("give", "take").and("_id").as("nameOrDate"),
-                sort(Sort.Direction.DESC, "_id")
+                sort(Sort.Direction.DESC, "nameOrDate")
         );
 
         //Convert the aggregation result into a List
@@ -76,7 +80,7 @@ public class LedgerService {
         Aggregation agg = newAggregation(
                 group("name").sum("give").as("give").sum("take").as("take"),
                 project("give", "take").and("_id").as("nameOrDate"),
-                sort(Sort.Direction.DESC, "_id")
+                sort(Sort.Direction.DESC, "nameOrDate")
         );
 
         //Convert the aggregation result into a List

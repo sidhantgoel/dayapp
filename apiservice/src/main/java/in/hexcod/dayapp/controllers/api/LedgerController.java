@@ -15,7 +15,7 @@ import java.util.List;
  * Created by sidhant on 17-05-2016.
  */
 @RestController
-@RequestMapping(value = "/ledger")
+@RequestMapping(value = "/api/ledger")
 public class LedgerController {
 
     @Autowired
@@ -23,6 +23,15 @@ public class LedgerController {
 
     @RequestMapping(value = "/entry", method = RequestMethod.POST)
     public ApiResponse<LedgerEntry> entry(@Valid @RequestBody EntryRequest entryRequest) {
+        LedgerEntry ledgerEntry = ledgerService.entry(entryRequest);
+        if(ledgerEntry == null) {
+            return ApiResponse.failure().build();
+        }
+        return ApiResponse.success().object(ledgerEntry);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ApiResponse<LedgerEntry> delete(@Valid @RequestBody EntryRequest entryRequest) {
         LedgerEntry ledgerEntry = ledgerService.entry(entryRequest);
         if(ledgerEntry == null) {
             return ApiResponse.failure().build();
