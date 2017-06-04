@@ -31,12 +31,9 @@ public class LedgerController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ApiResponse<LedgerEntry> delete(@Valid @RequestBody EntryRequest entryRequest) {
-        LedgerEntry ledgerEntry = ledgerService.entry(entryRequest);
-        if(ledgerEntry == null) {
-            return ApiResponse.failure().build();
-        }
-        return ApiResponse.success().object(ledgerEntry);
+    public ApiResponse<Void> delete(@PathVariable("id") String id) {
+        ledgerService.delete(id);
+        return ApiResponse.success().object(null);
     }
 
     @RequestMapping(value = "/by-date/{date}", method = RequestMethod.GET)
