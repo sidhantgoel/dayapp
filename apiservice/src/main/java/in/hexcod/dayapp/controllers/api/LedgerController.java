@@ -54,6 +54,12 @@ public class LedgerController {
         return ApiResponse.success().object(ledgerEntries);
     }
 
+    @RequestMapping(value = "/by-account/{name}", method = RequestMethod.DELETE)
+    public ApiResponse<Void> deleteByName(@PathVariable("name") String name) {
+        ledgerService.deleteByName(name);
+        return ApiResponse.success().build();
+    }
+
     @RequestMapping(value = "/summary/by-date", method = RequestMethod.GET)
     public ApiResponse<List<SummaryEntry>> summaryByDate() {
         List<SummaryEntry> summaryEntries = ledgerService.summaryByDate();

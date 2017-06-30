@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface LedgerEntryRepository extends MongoRepository<LedgerEntry, String> {
     List<LedgerEntry> findByName(String name);
+    void deleteByName(String name);
     List<LedgerEntry> findByDate(String date);
 }

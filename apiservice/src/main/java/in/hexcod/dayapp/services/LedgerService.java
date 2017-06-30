@@ -61,6 +61,10 @@ public class LedgerService {
         return ledgerEntryRepository.findByName(name);
     }
 
+    public void deleteByName(String name) {
+        ledgerEntryRepository.deleteByName(name);
+    }
+
     public List<SummaryEntry> summaryByDate() {
         Aggregation agg = newAggregation(
                 group("date").sum("give").as("give").sum("take").as("take"),
